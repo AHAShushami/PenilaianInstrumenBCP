@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borang Penilaian Instrumen BCP JKN Kedah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .form-radio { accent-color: #1e3a8a; }
+        .glass-header { background: rgba(30, 58, 138, 0.95); backdrop-filter: blur(10px); }
+        
+        /* Loading Spinner */
+        .loader {
+            border: 3px solid #f3f3f3; border-radius: 50%; border-top: 3px solid #ffffff;
+            width: 20px; height: 20px; animation: spin 1s linear infinite; display: inline-block; vertical-align: middle;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        /* Custom Scrollbar for Attachment */
+        .custom-scroll::-webkit-scrollbar { width: 8px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 8px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .custom-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        /* Hide element on print */
+        @media print {
+            body { background-color: white; }
+            .no-print { display: none; }
+            .container { box-shadow: none; max-width: 100%; padding: 0; margin: 0; border: none; }
+            .page-break { page-break-before: always; }
+            details[open] summary ~ * { display: block; }
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans pb-12">
+
+    <!-- Header Kerajaan / Rasmi -->
+    <div class="glass-header text-white py-6 shadow-md no-print mb-8">
+        <div class="max-w-5xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between">
+            <div>
+                <h1 class="text-2xl font-bold tracking-wide">JABATAN KESIHATAN NEGERI KEDAH</h1>
+                <p class="text-blue-200 text-sm mt-1">Unit Kesihatan Pekerjaan dan Alam Sekitar</p>
+            </div>
+            <div class="mt-4 md:mt-0 text-sm font-medium bg-blue-800 px-4 py-2 rounded-lg border border-blue-700 shadow-inner">
+                SULIT & PERSENDIRIAN
+            </div>
+        </div>
+    </div>
+
+    <div class="container max-w-5xl mx-auto bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden">
+        
+        <!-- Form Header -->
+        <div class="bg-slate-50 border-b border-slate-200 p-8 md:p-10 text-center">
+            <h1 class="text-2xl md:text-3xl font-extrabold text-slate-800 uppercase mb-3">Penilaian Kesahan & Kejelasan Item</h1>
+            <h2 class="text-base md:text-lg font-medium text-slate-600">Instrumen Tinjauan Kesiapsiagaan Krisis BCP JKN Kedah</h2>
+        </div>
+
+        <form id="bcpForm" class="p-6 md:p-10">
+
+            <!-- Arahan & Skala -->
+            <div class="bg-white border-2 border-blue-200 rounded-xl p-6 mb-10 shadow-sm relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-2 h-full bg-blue-600"></div>
+                <h3 class="font-bold text-lg text-blue-900 mb-2">ARAHAN KEPADA PENILAI (KAJIAN RINTIS)</h3>
+                <p class="text-slate-700 text-sm md:text-base mb-6 leading-relaxed">
+                    Sila baca setiap <strong>Soalan Asal</strong> di bawah dan berikan penilaian anda bagi dua aspek utama: <br>
+                    <strong>1. Kejelasan (Clarity):</strong> Adakah ayat soalan ini mudah difahami oleh staf JKN?<br>
+                    <strong>2. Kerelevanan (Relevance):</strong> Adakah soalan ini tepat & penting untuk konteks JKN Kedah?
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div class="bg-slate-50 p-4 rounded border border-slate-200">
+                        <span class="font-bold text-slate-800 block mb-2 border-b pb-1">Skala Kejelasan (Clarity)</span>
+                        <ul class="space-y-1 text-slate-600">
+                            <li><strong>1</strong> - Sangat Tidak Jelas (Perlu diubah sepenuhnya)</li>
+                            <li><strong>2</strong> - Tidak Jelas (Perlu banyak pembaikan ayat)</li>
+                            <li><strong>3</strong> - Jelas (Hanya perlu pembaikan kecil)</li>
+                            <li><strong>4</strong> - Sangat Jelas (Sempurna & mudah difahami)</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded border border-slate-200">
+                        <span class="font-bold text-slate-800 block mb-2 border-b pb-1">Skala Kerelevanan (Relevance)</span>
+                        <ul class="space-y-1 text-slate-600">
+                            <li><strong>1</strong> - Sangat Tidak Relevan (Gugurkan item ini)</li>
+                            <li><strong>2</strong> - Tidak Relevan (Kurang sesuai untuk JKN)</li>
+                            <li><strong>3</strong> - Relevan (Sesuai tetapi boleh ditambah baik)</li>
+                            <li><strong>4</strong> - Sangat Relevan (Sangat penting untuk dikaji)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EMBEDDED DRAFT QUESTIONNAIRE (ACCORDION) -->
+            <details class="bg-white border-2 border-slate-300 rounded-lg shadow-sm mb-12 group no-print">
+                <summary class="font-bold bg-slate-200 text-slate-800 p-4 cursor-pointer hover:bg-slate-300 transition rounded-lg group-open:rounded-b-none flex justify-between items-center">
+                    <span class="flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        📄 KLIK DI SINI UNTUK MEMBACA DRAF INSTRUMEN & SUMBER RUJUKAN
+                    </span>
+                    <span class="text-sm font-normal text-blue-700">(Buka/Tutup)</span>
+                </summary>
+                
+                <div class="p-6 bg-slate-50 border-t border-slate-300 text-sm custom-scroll overflow-y-auto max-h-[500px] leading-relaxed text-slate-700 shadow-inner">
+                    
+                    <div class="mb-4 text-center font-bold text-lg text-slate-800 border-b pb-2 uppercase">Instrumen Soal Selidik: Analisis Keperluan (Fasa 1 DDR)</div>
+                    
+                    <div class="mb-6 space-y-1 bg-white p-4 border border-slate-200 rounded">
+                        <p><span class="font-bold text-slate-800">Tajuk:</span> Tinjauan Kesiapsiagaan Krisis dan Keperluan Pelan Kesinambungan Perniagaan (BCP) Bersepadu OSH di JKN Kedah.</p>
+                        <p><span class="font-bold text-slate-800">Platform Sasaran:</span> Google Forms / Borang Dalam Talian</p>
+                        <p><span class="font-bold text-slate-800">Masa Menjawab:</span> 5-7 Minit</p>
+                    </div>
+
+                    <div class="mb-8 border border-blue-200 rounded-lg overflow-hidden shadow-sm">
+                        <div class="bg-blue-100 px-4 py-3 font-bold text-blue-900 text-center uppercase tracking-wide">Jadual Spesifikasi & Sumber Adaptasi Instrumen (Construct Mapping)</div>
+                        <div class="p-3 bg-blue-50 text-xs text-slate-600 italic border-b border-blue-200">
+                            <strong>Nota Penyelidik:</strong> Jadual ini adalah bukti rujukan akademik bahawa item di dalam soal selidik ini diadaptasi daripada instrumen yang telah disahkan (validated) serta dokumen dasar kerajaan.
+                        </div>
+                        <table class="w-full text-left border-collapse">
+                            <thead class="bg-white border-b border-blue-200 text-slate-800">
+                                <tr>
+                                    <th class="p-3 border-r border-blue-200 w-1/5">Bahagian</th>
+                                    <th class="p-3 border-r border-blue-200 w-2/5">Konstruk yang Diukur</th>
+                                    <th class="p-3 w-2/5">Sumber Rujukan / Instrumen Asal yang Diadaptasi (Validated Source)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-blue-100 bg-white">
+                                <tr>
+                                    <td class="p-3 border-r border-blue-100 font-semibold align-top text-blue-800">Bahagian B</td>
+                                    <td class="p-3 border-r border-blue-100 align-top">Tahap Pengetahuan & Kesedaran (Kesiapsiagaan)</td>
+                                    <td class="p-3 align-top">
+                                        <ol class="list-decimal pl-4 space-y-1">
+                                            <li><strong>EPIQ (Emergency Preparedness Information Questionnaire)</strong> oleh Wisniewski et al. (2001) - <em>Sub-skala: Familiarity with emergency response & communication.</em></li>
+                                            <li><strong>SPA Bil. 1/2025</strong> (Pekeliling BCM).</li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 border-r border-blue-100 font-semibold align-top text-blue-800">Bahagian C</td>
+                                    <td class="p-3 border-r border-blue-100 align-top">Pengalaman Insiden Lepas (Penilaian Risiko)</td>
+                                    <td class="p-3 align-top">
+                                        <strong>HVA (Hazard Vulnerability Analysis) Tool</strong> oleh Kaiser Permanente <em>(Instrumen standard industri penjagaan kesihatan untuk menilai kekerapan bencana).</em>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 border-r border-blue-100 font-semibold align-top text-blue-800">Bahagian D</td>
+                                    <td class="p-3 border-r border-blue-100 align-top">Keperluan Operasi & Keselamatan BCP</td>
+                                    <td class="p-3 align-top">
+                                        <ol class="list-decimal pl-4 space-y-1">
+                                            <li><strong>BCI Good Practice Guidelines</strong> (Standard Antarabangsa BCM).</li>
+                                            <li><strong>Borang CHRA (Chemical Health Risk Assessment) & JHA</strong> seliaan DOSH Malaysia.</li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="mb-4 text-center font-bold text-slate-800 border-b pb-1">--- SOALAN KAJIAN SEBENAR ---</div>
+                    
+                    <strong class="text-blue-800">MUKA DEPAN: PENGENALAN & PERSETUJUAN (INFORMED CONSENT)</strong><br>
+                    Salam sejahtera,<br>
+                    Tinjauan ini dijalankan bagi mengenal pasti tahap kesiapsiagaan dan keperluan operasi warga kerja Jabatan Kesihatan Negeri (JKN) Kedah ketika menghadapi sebarang krisis atau kecemasan di tempat kerja. Data yang dikumpul akan digunakan untuk membangunkan sebuah Pelan Kesinambungan Perkhidmatan (BCP) Bersepadu selaras dengan Surat Pekeliling Am (SPA) Bil. 1 Tahun 2025.<br>
+                    Segala maklumat yang diberikan adalah SULIT dan hanya digunakan untuk tujuan penambahbaikan operasi jabatan serta kajian analisis keperluan.<br>
+                    ● Adakah anda bersetuju untuk menyertai tinjauan ini? [ ] Ya / [ ] Tidak<br><br>
+
+                    <strong class="text-blue-800">BAHAGIAN A: DEMOGRAFI RESPONDEN</strong><br>
+                    1. Kategori Penempatan/Tugas Utama Anda:<br>
+                    &nbsp;&nbsp;&nbsp;[ ] Kumpulan Pengurusan / Pentadbiran Pejabat (Cth: PTD, PT, Kewangan)<br>
+                    &nbsp;&nbsp;&nbsp;[ ] Kumpulan Klinikal / Perubatan (Cth: Pegawai Perubatan, Jururawat, Farmasi)<br>
+                    &nbsp;&nbsp;&nbsp;[ ] Kumpulan Lapangan / Penguatkuasaan (Cth: Unit Vektor, Inspektorat, Pemandu)<br>
+                    2. Tempoh Perkhidmatan di JKN Kedah:<br>
+                    &nbsp;&nbsp;&nbsp;[ ] Kurang 1 Tahun &nbsp;&nbsp; [ ] 1 - 5 Tahun &nbsp;&nbsp; [ ] 6 - 10 Tahun &nbsp;&nbsp; [ ] Lebih 10 Tahun<br><br>
+
+                    <strong class="text-blue-800">BAHAGIAN B: TAHAP KESEDARAN DAN PENGETAHUAN SEDIA ADA</strong><br>
+                    1. Saya tahu apakah tindakan pertama yang perlu dilakukan jika berlaku kecemasan di fasiliti JKN.<br>
+                    2. Saya mengetahui lokasi tepat Assembly Point dan Laluan Kecemasan di aras saya.<br>
+                    3. Saya kenal siapa Ahli ERT / Ketua Tingkat / First Aider di bahagian saya.<br>
+                    4. Saya menyedari wujudnya Surat Pekeliling Am Bil. 1 Tahun 2025 (BCM).<br>
+                    5. Organisasi saya mempunyai sistem "Call Tree" yang jelas jika bangunan ditutup.<br><br>
+
+                    <strong class="text-blue-800">BAHAGIAN C: PENGALAMAN SEMASA KRISIS</strong><br>
+                    1. Pernahkah anda mengalami gangguan operasi (elektrik putus, IT down, wabak, banjir dll)?<br>
+                    2. Sejauh manakah anda berpuas hati dengan penyaluran maklumat semasa krisis tersebut?<br><br>
+
+                    <strong class="text-blue-800">BAHAGIAN D: KEPERLUAN KRITIKAL PEMBANGUNAN BCP</strong><br>
+                    1. Latihan Pengungsian Bangunan pelbagai senario.<br>
+                    2. Sistem Rantaian Komunikasi (Call Tree) dikemas kini 6 bulan sekali.<br>
+                    3. Prosedur kelangsungan rantaian sejuk (Cold Chain) Vaksin & Farmasi.<br>
+                    4. Pelan tapak alternatif untuk Bilik Gerakan CPRC.<br>
+                    5. SOP pemulihan Sistem Maklumat Kesihatan / IT Server.<br>
+                    6. Prosedur pemindahan selamat Dokumen Fizikal & Kewangan.<br>
+                    7. Garis panduan OSH pengerahan Pasukan Lapangan (Vektor) ke kawasan bencana.<br>
+                    8. SOP Pelaksanaan Bekerja Dari Rumah (BDR) jika bangunan tidak selamat.<br>
+                    9. Simpanan stok Peralatan Perlindungan Diri (PPE) kecemasan.<br>
+                    10. Pemeriksaan kualiti udara (IAQ) dan struktur bangunan sebelum masuk semula.<br>
+                    11. Perkhidmatan Sokongan Psikologi Pertama (PFA) untuk trauma staf.<br><br>
+
+                    <strong class="text-blue-800">BAHAGIAN E: MAKLUM BALAS TERBUKA</strong><br>
+                    1. Apakah perkhidmatan unit anda yang TIDAK BOLEH TERGENDALA MELEBIHI 24 JAM?<br>
+                    2. Nyatakan cadangan untuk meningkatkan aspek OSH semasa bencana.
+                </div>
+            </details>
+
+            <!-- BAHAGIAN A: Demografi -->
+            <div class="mb-12">
+                <h3 class="text-lg font-bold bg-slate-800 text-white px-5 py-3 rounded-t-lg">BAHAGIAN A: MAKLUMAT PENILAI</h3>
+                <div class="border border-slate-200 border-t-0 rounded-b-lg p-6 bg-slate-50">
+                    <div class="mb-6">
+                        <label class="block font-semibold text-slate-800 mb-2">1. Kategori Penempatan / Tugas: <span class="text-red-500">*</span></label>
+                        <select name="kategori" required class="w-full md:w-3/4 border border-slate-300 p-3 rounded-md focus:ring-2 focus:ring-blue-500 outline-none bg-white shadow-sm cursor-pointer">
+                            <option value="" disabled selected>-- Sila Pilih Kategori --</option>
+                            <option value="Pengurusan">Kumpulan Pengurusan / Pentadbiran Pejabat (Cth: PTD, PT, Kewangan)</option>
+                            <option value="Klinikal">Kumpulan Klinikal / Perubatan (Cth: Pegawai Perubatan, Jururawat, Farmasi)</option>
+                            <option value="Lapangan">Kumpulan Lapangan / Penguatkuasaan (Cth: Unit Vektor, Inspektorat, Pemandu)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-800 mb-2">2. Tempoh Perkhidmatan di JKN Kedah: <span class="text-red-500">*</span></label>
+                        <select name="tempoh_tahun" required class="w-full md:w-1/2 border border-slate-300 p-3 rounded-md focus:ring-2 focus:ring-blue-500 outline-none bg-white shadow-sm cursor-pointer">
+                            <option value="" disabled selected>-- Sila Pilih Tempoh --</option>
+                            <option value="Kurang 1 Tahun">Kurang 1 Tahun</option>
+                            <option value="1 - 5 Tahun">1 - 5 Tahun</option>
+                            <option value="6 - 10 Tahun">6 - 10 Tahun</option>
+                            <option value="Lebih 10 Tahun">Lebih 10 Tahun</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- BAHAGIAN B: Tahap Kesedaran -->
+            <div class="mb-12">
+                <div class="flex items-center mb-4">
+                    <div class="bg-blue-800 text-white text-xl font-bold w-10 h-10 flex items-center justify-center rounded-lg shadow-md mr-3">B</div>
+                    <h3 class="text-xl font-bold text-slate-800">PENILAIAN ITEM: TAHAP KESEDARAN & PENGETAHUAN</h3>
+                </div>
+                
+                <!-- Item B1 -->
+                <div class="bg-white border-2 border-slate-200 rounded-xl shadow-sm mb-6 overflow-hidden">
+                    <div class="bg-blue-50/60 p-5 border-b border-slate-200">
+                        <span class="inline-block px-2 py-1 bg-blue-200 text-blue-800 text-xs font-bold rounded mb-2">ITEM B1</span>
+                        <p class="font-semibold text-slate-800 text-base leading-relaxed">Saya tahu apakah tindakan pertama yang perlu dilakukan jika berlaku kecemasan (cth: kebakaran, terputus bekalan elektrik) di bangunan/fasiliti JKN Kedah.</p>
+                        <p class="text-sm text-slate-500 mt-2 italic">Format: Skala 1 (Sangat Tidak Setuju) hingga 5 (Sangat Setuju)</p>
+                    </div>
+                    <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-6 md:divide-x divide-slate-200">
+                        <div class="md:pr-4">
+                            <p class="text-sm font-bold text-slate-700 mb-3 text-center">Skor Kejelasan (Clarity) <span class="text-red-500">*</span></p>
+                            <div class="grid grid-cols-4 gap-2">
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100 transition"><input type="radio" name="clarity_b1" value="1" required class="block mx-auto mb-1"><span class="text-xs font-semibold">1</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100 transition"><input type="radio" name="clarity_b1" value="2" required class="block mx-auto mb-1"><span class="text-xs font-semibold">2</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100 transition"><input type="radio" name="clarity_b1" value="3" required class="block mx-auto mb-1"><span class="text-xs font-semibold">3</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100 transition"><input type="radio" name="clarity_b1" value="4" required class="block mx-auto mb-1"><span class="text-xs font-semibold">4</span></label>
+                            </div>
+                        </div>
+                        <div class="md:pl-6">
+                            <p class="text-sm font-bold text-slate-700 mb-3 text-center">Skor Kerelevanan (Relevance) <span class="text-red-500">*</span></p>
+                            <div class="grid grid-cols-4 gap-2">
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="relev_b1" value="1" required class="block mx-auto mb-1"><span class="text-xs font-semibold">1</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="relev_b1" value="2" required class="block mx-auto mb-1"><span class="text-xs font-semibold">2</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="relev_b1" value="3" required class="block mx-auto mb-1"><span class="text-xs font-semibold">3</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="relev_b1" value="4" required class="block mx-auto mb-1"><span class="text-xs font-semibold">4</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item B2 -->
+                <div class="bg-white border-2 border-slate-200 rounded-xl shadow-sm mb-6 overflow-hidden">
+                    <div class="bg-blue-50/60 p-5 border-b border-slate-200">
+                        <span class="inline-block px-2 py-1 bg-blue-200 text-blue-800 text-xs font-bold rounded mb-2">ITEM B2</span>
+                        <p class="font-semibold text-slate-800 text-base leading-relaxed">Saya mengetahui lokasi tepat Assembly Point (Tempat Berkumpul) dan Laluan Kecemasan di aras / tempat kerja saya.</p>
+                        <p class="text-sm text-slate-500 mt-2 italic">Format: Skala 1 (Sangat Tidak Setuju) hingga 5 (Sangat Setuju)</p>
+                    </div>
+                    <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-6 md:divide-x divide-slate-200">
+                        <div class="md:pr-4">
+                            <p class="text-sm font-bold text-slate-700 mb-3 text-center">Skor Kejelasan (Clarity) <span class="text-red-500">*</span></p>
+                            <div class="grid grid-cols-4 gap-2">
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100 transition"><input type="radio" name="clarity_b2" value="1" required class="block mx-auto mb-1"><span class="text-xs font-semibold">1</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100 transition"><input type="radio" name="clarity_b2" value="2" required class="block mx-auto mb-1"><span class="text-xs font-semibold">2</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100 transition"><input type="radio" name="clarity_b2" value="3" required class="block mx-auto mb-1"><span class="text-xs font-semibold">3</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100 transition"><input type="radio" name="clarity_b2" value="4" required class="block mx-auto mb-1"><span class="text-xs font-semibold">4</span></label>
+                            </div>
+                        </div>
+                        <div class="md:pl-6">
+                            <p class="text-sm font-bold text-slate-700 mb-3 text-center">Skor Kerelevanan (Relevance) <span class="text-red-500">*</span></p>
+                            <div class="grid grid-cols-4 gap-2">
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="relev_b2" value="1" required class="block mx-auto mb-1"><span class="text-xs font-semibold">1</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="relev_b2" value="2" required class="block mx-auto mb-1"><span class="text-xs font-semibold">2</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="relev_b2" value="3" required class="block mx-auto mb-1"><span class="text-xs font-semibold">3</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="relev_b2" value="4" required class="block mx-auto mb-1"><span class="text-xs font-semibold">4</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item B3 -->
+                <div class="bg-white border-2 border-slate-200 rounded-xl shadow-sm mb-6 overflow-hidden">
+                    <div class="bg-blue-50/60 p-5 border-b border-slate-200">
+                        <span class="inline-block px-2 py-1 bg-blue-200 text-blue-800 text-xs font-bold rounded mb-2">ITEM B3</span>
+                        <p class="font-semibold text-slate-800 text-base leading-relaxed">Saya kenal siapa Ahli Pasukan Tindakan Kecemasan (ERT) / Ketua Tingkat / First Aider di bahagian saya.</p>
+                        <p class="text-sm text-slate-500 mt-2 italic">Format: Skala 1 (Sangat Tidak Setuju) hingga 5 (Sangat Setuju)</p>
+                    </div>
+                    <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-6 md:divide-x divide-slate-200">
+                        <div class="md:pr-4">
+                            <p class="text-sm font-bold text-slate-700 mb-3 text-center">Skor Kejelasan (Clarity) <span class="text-red-500">*</span></p>
+                            <div class="grid grid-cols-4 gap-2">
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100 transition"><input type="radio" name="clarity_b3" value="1" required class="block mx-auto mb-1"><span class="text-xs font-semibold">1</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100 transition"><input type="radio" name="clarity_b3" value="2" required class="block mx-auto mb-1"><span class="text-xs font-semibold">2</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100 transition"><input type="radio" name="clarity_b3" value="3" required class="block mx-auto mb-1"><span class="text-xs font-semibold">3</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100 transition"><input type="radio" name="clarity_b3" value="4" required class="block mx-auto mb-1"><span class="text-xs font-semibold">4</span></label>
+                            </div>
+                        </div>
+                        <div class="md:pl-6">
+                            <p class="text-sm font-bold text-slate-700 mb-3 text-center">Skor Kerelevanan (Relevance) <span class="text-red-500">*</span></p>
+                            <div class="grid grid-cols-4 gap-2">
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="relev_b3" value="1" required class="block mx-auto mb-1"><span class="text-xs font-semibold">1</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="relev_b3" value="2" required class="block mx-auto mb-1"><span class="text-xs font-semibold">2</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="relev_b3" value="3" required class="block mx-auto mb-1"><span class="text-xs font-semibold">3</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="relev_b3" value="4" required class="block mx-auto mb-1"><span class="text-xs font-semibold">4</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item B4 -->
+                <div class="bg-white border-2 border-slate-200 rounded-xl shadow-sm mb-6 overflow-hidden">
+                    <div class="bg-blue-50/60 p-5 border-b border-slate-200">
+                        <span class="inline-block px-2 py-1 bg-blue-200 text-blue-800 text-xs font-bold rounded mb-2">ITEM B4</span>
+                        <p class="font-semibold text-slate-800 text-base leading-relaxed">Saya menyedari wujudnya Surat Pekeliling Am Bil. 1 Tahun 2025 berkaitan Pengurusan Kesinambungan Perkhidmatan (BCM) dalam Kerajaan.</p>
+                        <p class="text-sm text-slate-500 mt-2 italic">Format: Skala 1 (Sangat Tidak Setuju) hingga 5 (Sangat Setuju)</p>
+                    </div>
+                    <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-6 md:divide-x divide-slate-200">
+                        <div class="md:pr-4">
+                            <p class="text-sm font-bold text-slate-700 mb-3 text-center">Skor Kejelasan (Clarity) <span class="text-red-500">*</span></p>
+                            <div class="grid grid-cols-4 gap-2">
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100 transition"><input type="radio" name="clarity_b4" value="1" required class="block mx-auto mb-1"><span class="text-xs font-semibold">1</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100 transition"><input type="radio" name="clarity_b4" value="2" required class="block mx-auto mb-1"><span class="text-xs font-semibold">2</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100 transition"><input type="radio" name="clarity_b4" value="3" required class="block mx-auto mb-1"><span class="text-xs font-semibold">3</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100 transition"><input type="radio" name="clarity_b4" value="4" required class="block mx-auto mb-1"><span class="text-xs font-semibold">4</span></label>
+                            </div>
+                        </div>
+                        <div class="md:pl-6">
+                            <p class="text-sm font-bold text-slate-700 mb-3 text-center">Skor Kerelevanan (Relevance) <span class="text-red-500">*</span></p>
+                            <div class="grid grid-cols-4 gap-2">
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="relev_b4" value="1" required class="block mx-auto mb-1"><span class="text-xs font-semibold">1</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="relev_b4" value="2" required class="block mx-auto mb-1"><span class="text-xs font-semibold">2</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="relev_b4" value="3" required class="block mx-auto mb-1"><span class="text-xs font-semibold">3</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="relev_b4" value="4" required class="block mx-auto mb-1"><span class="text-xs font-semibold">4</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item B5 -->
+                <div class="bg-white border-2 border-slate-200 rounded-xl shadow-sm mb-6 overflow-hidden">
+                    <div class="bg-blue-50/60 p-5 border-b border-slate-200">
+                        <span class="inline-block px-2 py-1 bg-blue-200 text-blue-800 text-xs font-bold rounded mb-2">ITEM B5</span>
+                        <p class="font-semibold text-slate-800 text-base leading-relaxed">Organisasi saya (Unit/Bahagian) mempunyai sistem "Call Tree" (Rantaian Panggilan) yang jelas untuk menyebarkan maklumat rasmi jika bangunan ditutup akibat krisis.</p>
+                        <p class="text-sm text-slate-500 mt-2 italic">Format: Skala 1 (Sangat Tidak Setuju) hingga 5 (Sangat Setuju)</p>
+                    </div>
+                    <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-6 md:divide-x divide-slate-200">
+                        <div class="md:pr-4">
+                            <p class="text-sm font-bold text-slate-700 mb-3 text-center">Skor Kejelasan (Clarity) <span class="text-red-500">*</span></p>
+                            <div class="grid grid-cols-4 gap-2">
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100 transition"><input type="radio" name="clarity_b5" value="1" required class="block mx-auto mb-1"><span class="text-xs font-semibold">1</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100 transition"><input type="radio" name="clarity_b5" value="2" required class="block mx-auto mb-1"><span class="text-xs font-semibold">2</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100 transition"><input type="radio" name="clarity_b5" value="3" required class="block mx-auto mb-1"><span class="text-xs font-semibold">3</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100 transition"><input type="radio" name="clarity_b5" value="4" required class="block mx-auto mb-1"><span class="text-xs font-semibold">4</span></label>
+                            </div>
+                        </div>
+                        <div class="md:pl-6">
+                            <p class="text-sm font-bold text-slate-700 mb-3 text-center">Skor Kerelevanan (Relevance) <span class="text-red-500">*</span></p>
+                            <div class="grid grid-cols-4 gap-2">
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="relev_b5" value="1" required class="block mx-auto mb-1"><span class="text-xs font-semibold">1</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="relev_b5" value="2" required class="block mx-auto mb-1"><span class="text-xs font-semibold">2</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="relev_b5" value="3" required class="block mx-auto mb-1"><span class="text-xs font-semibold">3</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="relev_b5" value="4" required class="block mx-auto mb-1"><span class="text-xs font-semibold">4</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- BAHAGIAN C: Pengalaman Semasa Krisis -->
+            <div class="mb-12">
+                <div class="flex items-center mb-4">
+                    <div class="bg-blue-800 text-white text-xl font-bold w-10 h-10 flex items-center justify-center rounded-lg shadow-md mr-3">C</div>
+                    <h3 class="text-xl font-bold text-slate-800">PENILAIAN ITEM: PENGALAMAN SEMASA KRISIS</h3>
+                </div>
+                
+                <!-- Item C1 -->
+                <div class="bg-white border-2 border-slate-200 rounded-xl shadow-sm mb-6 overflow-hidden">
+                    <div class="bg-blue-50/60 p-5 border-b border-slate-200">
+                        <span class="inline-block px-2 py-1 bg-blue-200 text-blue-800 text-xs font-bold rounded mb-2">ITEM C1</span>
+                        <p class="font-semibold text-slate-800 text-base leading-relaxed">Pernahkah anda mengalami sebarang gangguan operasi/krisis semasa bertugas di JKN Kedah? (Boleh tanda lebih dari satu)</p>
+                        <ul class="list-disc pl-5 text-sm text-slate-600 mt-2 space-y-1">
+                            <li>Bekalan elektrik/air terputus secara mengejut</li>
+                            <li>Gangguan sistem IT / Server 'Down'</li>
+                            <li>Penularan wabak di tempat kerja</li>
+                            <li>Cuaca ekstrem / Banjir</li>
+                            <li>Ancaman keselamatan di lapangan</li>
+                            <li>Lain-lain</li>
+                        </ul>
+                    </div>
+                    <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-6 md:divide-x divide-slate-200">
+                        <div class="md:pr-4">
+                            <p class="text-sm font-bold text-slate-700 mb-3 text-center">Skor Kejelasan <span class="text-red-500">*</span></p>
+                            <div class="grid grid-cols-4 gap-2">
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100"><input type="radio" name="clarity_c1" value="1" required class="block mx-auto mb-1"><span class="text-xs font-semibold">1</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100"><input type="radio" name="clarity_c1" value="2" required class="block mx-auto mb-1"><span class="text-xs font-semibold">2</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100"><input type="radio" name="clarity_c1" value="3" required class="block mx-auto mb-1"><span class="text-xs font-semibold">3</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100"><input type="radio" name="clarity_c1" value="4" required class="block mx-auto mb-1"><span class="text-xs font-semibold">4</span></label>
+                            </div>
+                        </div>
+                        <div class="md:pl-6">
+                            <p class="text-sm font-bold text-slate-700 mb-3 text-center">Skor Kerelevanan <span class="text-red-500">*</span></p>
+                            <div class="grid grid-cols-4 gap-2">
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50"><input type="radio" name="relev_c1" value="1" required class="block mx-auto mb-1"><span class="text-xs font-semibold">1</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50"><input type="radio" name="relev_c1" value="2" required class="block mx-auto mb-1"><span class="text-xs font-semibold">2</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50"><input type="radio" name="relev_c1" value="3" required class="block mx-auto mb-1"><span class="text-xs font-semibold">3</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50"><input type="radio" name="relev_c1" value="4" required class="block mx-auto mb-1"><span class="text-xs font-semibold">4</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item C2 -->
+                <div class="bg-white border-2 border-slate-200 rounded-xl shadow-sm mb-6 overflow-hidden">
+                    <div class="bg-blue-50/60 p-5 border-b border-slate-200">
+                        <span class="inline-block px-2 py-1 bg-blue-200 text-blue-800 text-xs font-bold rounded mb-2">ITEM C2</span>
+                        <p class="font-semibold text-slate-800 text-base leading-relaxed">Berdasarkan pengalaman krisis di atas, sejauh manakah anda berpuas hati dengan penyaluran maklumat dan arahan daripada pihak Pengurusan?</p>
+                        <p class="text-sm text-slate-500 mt-2 italic">Format: Skala 1 (Sangat Tidak Berpuas Hati) hingga 5 (Sangat Berpuas Hati)</p>
+                    </div>
+                    <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-6 md:divide-x divide-slate-200">
+                        <div class="md:pr-4">
+                            <p class="text-sm font-bold text-slate-700 mb-3 text-center">Skor Kejelasan <span class="text-red-500">*</span></p>
+                            <div class="grid grid-cols-4 gap-2">
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100"><input type="radio" name="clarity_c2" value="1" required class="block mx-auto mb-1"><span class="text-xs font-semibold">1</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100"><input type="radio" name="clarity_c2" value="2" required class="block mx-auto mb-1"><span class="text-xs font-semibold">2</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100"><input type="radio" name="clarity_c2" value="3" required class="block mx-auto mb-1"><span class="text-xs font-semibold">3</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100"><input type="radio" name="clarity_c2" value="4" required class="block mx-auto mb-1"><span class="text-xs font-semibold">4</span></label>
+                            </div>
+                        </div>
+                        <div class="md:pl-6">
+                            <p class="text-sm font-bold text-slate-700 mb-3 text-center">Skor Kerelevanan <span class="text-red-500">*</span></p>
+                            <div class="grid grid-cols-4 gap-2">
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50"><input type="radio" name="relev_c2" value="1" required class="block mx-auto mb-1"><span class="text-xs font-semibold">1</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50"><input type="radio" name="relev_c2" value="2" required class="block mx-auto mb-1"><span class="text-xs font-semibold">2</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50"><input type="radio" name="relev_c2" value="3" required class="block mx-auto mb-1"><span class="text-xs font-semibold">3</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50"><input type="radio" name="relev_c2" value="4" required class="block mx-auto mb-1"><span class="text-xs font-semibold">4</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- BAHAGIAN D: Keperluan Kritikal Pembangunan BCP -->
+            <div class="mb-12">
+                <div class="flex items-center mb-4">
+                    <div class="bg-blue-800 text-white text-xl font-bold w-10 h-10 flex items-center justify-center rounded-lg shadow-md mr-3">D</div>
+                    <h3 class="text-xl font-bold text-slate-800">PENILAIAN ITEM: KEPERLUAN PEMBANGUNAN BCP</h3>
+                </div>
+                
+                <p class="mb-6 text-slate-600 italic">Format Jawapan untuk Semua Item Bahagian D: Skala 1 (Sangat Tidak Diperlukan) hingga 5 (Sangat Diperlukan)</p>
+
+                <!-- Generator for D1 to D11 -->
+                <div id="section-d-container"></div>
+                <script>
+                    const d_items = [
+                        "D1: Latihan Pengungsian Bangunan (Fire Drill) yang melibatkan senario pelbagai (bukan sekadar kebakaran, mungkin tumpahan bahan kimia).",
+                        "D2: Sistem Rantaian Komunikasi (Call Tree Rasmi) melalui Telegram/WhatsApp yang dikemas kini setiap 6 bulan.",
+                        "D3: Prosedur sandaran (backup) kecemasan bagi memastikan kelangsungan rantaian sejuk (Cold Chain) Vaksin dan Logistik Farmasi tidak terjejas jika bekalan elektrik terputus.",
+                        "D4: Pelan tapak alternatif (Alternate Site) bagi meneruskan operasi Bilik Gerakan CPRC (Wabak/Bencana) sekiranya ibu pejabat terpaksa ditutup.",
+                        "D5: SOP kelangsungan data bagi melindungi dan memulihkan Sistem Maklumat Kesihatan / Maklumat Sensitif Jabatan sekiranya pelayan (server) utama mengalami bencana.",
+                        "D6: Prosedur penyelamatan dan pemindahan selamat bagi Dokumen Fizikal Kerajaan & Rekod Kewangan yang kritikal / terperingkat dari kawasan arkib dan pejabat jika berlaku bencana.",
+                        "D7: Garis panduan OSH mengenai pengerahan Pasukan Lapangan (Vektor/Inspektorat) untuk beroperasi di kawasan berisiko tinggi akibat bencana alam (contoh: kawasan banjir).",
+                        "D8: SOP yang jelas mengenai Pelaksanaan Bekerja Dari Rumah (BDR) jika bangunan diisytiharkan tidak selamat mengikut pekeliling BCM terkini.",
+                        "D9: Peruntukan dan simpanan stok Peralatan Perlindungan Diri (PPE) khas untuk kecemasan di setiap aras/kenderaan.",
+                        "D10: Pemeriksaan kualiti udara (IAQ) dan struktur bangunan oleh pakar (JKR/DOSH) sebelum staf diarah masuk semula bertugas.",
+                        "D11: Penyediaan perkhidmatan Sokongan Psikologi Pertama (PFA) bagi staf yang trauma akibat insiden/krisis pekerjaan."
+                    ];
+
+                    const container = document.getElementById('section-d-container');
+                    let htmlContent = '';
+
+                    d_items.forEach((item, index) => {
+                        let id = index + 1;
+                        let textParts = item.split(': ');
+                        htmlContent += `
+                        <div class="bg-white border-2 border-slate-200 rounded-xl shadow-sm mb-6 overflow-hidden page-break-inside-avoid">
+                            <div class="bg-blue-50/60 p-5 border-b border-slate-200">
+                                <span class="inline-block px-2 py-1 bg-blue-200 text-blue-800 text-xs font-bold rounded mb-2">ITEM D${id}</span>
+                                <p class="font-semibold text-slate-800 text-base leading-relaxed">${textParts[1]}</p>
+                            </div>
+                            <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-6 md:divide-x divide-slate-200">
+                                <div class="md:pr-4">
+                                    <p class="text-sm font-bold text-slate-700 mb-3 text-center">Skor Kejelasan <span class="text-red-500">*</span></p>
+                                    <div class="grid grid-cols-4 gap-2">
+                                        <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100"><input type="radio" name="clarity_d${id}" value="1" required class="block mx-auto mb-1"><span class="text-xs font-semibold">1</span></label>
+                                        <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100"><input type="radio" name="clarity_d${id}" value="2" required class="block mx-auto mb-1"><span class="text-xs font-semibold">2</span></label>
+                                        <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100"><input type="radio" name="clarity_d${id}" value="3" required class="block mx-auto mb-1"><span class="text-xs font-semibold">3</span></label>
+                                        <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100"><input type="radio" name="clarity_d${id}" value="4" required class="block mx-auto mb-1"><span class="text-xs font-semibold">4</span></label>
+                                    </div>
+                                </div>
+                                <div class="md:pl-6">
+                                    <p class="text-sm font-bold text-slate-700 mb-3 text-center">Skor Kerelevanan <span class="text-red-500">*</span></p>
+                                    <div class="grid grid-cols-4 gap-2">
+                                        <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50"><input type="radio" name="relev_d${id}" value="1" required class="block mx-auto mb-1"><span class="text-xs font-semibold">1</span></label>
+                                        <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50"><input type="radio" name="relev_d${id}" value="2" required class="block mx-auto mb-1"><span class="text-xs font-semibold">2</span></label>
+                                        <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50"><input type="radio" name="relev_d${id}" value="3" required class="block mx-auto mb-1"><span class="text-xs font-semibold">3</span></label>
+                                        <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50"><input type="radio" name="relev_d${id}" value="4" required class="block mx-auto mb-1"><span class="text-xs font-semibold">4</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                    });
+                    
+                    container.innerHTML = htmlContent;
+                </script>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- BAHAGIAN E: Maklum Balas Terbuka -->
+            <div class="mb-12">
+                <div class="flex items-center mb-4">
+                    <div class="bg-blue-800 text-white text-xl font-bold w-10 h-10 flex items-center justify-center rounded-lg shadow-md mr-3">E</div>
+                    <h3 class="text-xl font-bold text-slate-800">PENILAIAN ITEM: MAKLUM BALAS TERBUKA</h3>
+                </div>
+                
+                <!-- Item E1 -->
+                <div class="bg-white border-2 border-slate-200 rounded-xl shadow-sm mb-6 overflow-hidden">
+                    <div class="bg-blue-50/60 p-5 border-b border-slate-200">
+                        <span class="inline-block px-2 py-1 bg-blue-200 text-blue-800 text-xs font-bold rounded mb-2">ITEM E1</span>
+                        <p class="font-semibold text-slate-800 text-base leading-relaxed">Pada pendapat anda, apakah perkhidmatan / fungsi unit anda yang paling kritikal dan "TIDAK BOLEH TERGENDALA MELEBIHI 24 JAM" mengikut ketetapan BCM?</p>
+                        <p class="text-sm text-slate-500 mt-2 italic">Format: Ruangan Teks Pendek</p>
+                    </div>
+                    <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-6 md:divide-x divide-slate-200">
+                        <div class="md:pr-4">
+                            <p class="text-sm font-bold text-slate-700 mb-3 text-center">Skor Kejelasan <span class="text-red-500">*</span></p>
+                            <div class="grid grid-cols-4 gap-2">
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100"><input type="radio" name="clarity_e1" value="1" required class="block mx-auto mb-1"><span class="text-xs font-semibold">1</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100"><input type="radio" name="clarity_e1" value="2" required class="block mx-auto mb-1"><span class="text-xs font-semibold">2</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100"><input type="radio" name="clarity_e1" value="3" required class="block mx-auto mb-1"><span class="text-xs font-semibold">3</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100"><input type="radio" name="clarity_e1" value="4" required class="block mx-auto mb-1"><span class="text-xs font-semibold">4</span></label>
+                            </div>
+                        </div>
+                        <div class="md:pl-6">
+                            <p class="text-sm font-bold text-slate-700 mb-3 text-center">Skor Kerelevanan <span class="text-red-500">*</span></p>
+                            <div class="grid grid-cols-4 gap-2">
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50"><input type="radio" name="relev_e1" value="1" required class="block mx-auto mb-1"><span class="text-xs font-semibold">1</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50"><input type="radio" name="relev_e1" value="2" required class="block mx-auto mb-1"><span class="text-xs font-semibold">2</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50"><input type="radio" name="relev_e1" value="3" required class="block mx-auto mb-1"><span class="text-xs font-semibold">3</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50"><input type="radio" name="relev_e1" value="4" required class="block mx-auto mb-1"><span class="text-xs font-semibold">4</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item E2 -->
+                <div class="bg-white border-2 border-slate-200 rounded-xl shadow-sm mb-6 overflow-hidden">
+                    <div class="bg-blue-50/60 p-5 border-b border-slate-200">
+                        <span class="inline-block px-2 py-1 bg-blue-200 text-blue-800 text-xs font-bold rounded mb-2">ITEM E2</span>
+                        <p class="font-semibold text-slate-800 text-base leading-relaxed">Sila nyatakan sebarang cadangan tambahan untuk meningkatkan aspek Keselamatan dan Kesihatan Pekerjaan (OSH) JKN Kedah ketika menghadapi bencana:</p>
+                        <p class="text-sm text-slate-500 mt-2 italic">Format: Ruangan Teks Panjang</p>
+                    </div>
+                    <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-6 md:divide-x divide-slate-200">
+                        <div class="md:pr-4">
+                            <p class="text-sm font-bold text-slate-700 mb-3 text-center">Skor Kejelasan <span class="text-red-500">*</span></p>
+                            <div class="grid grid-cols-4 gap-2">
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100"><input type="radio" name="clarity_e2" value="1" required class="block mx-auto mb-1"><span class="text-xs font-semibold">1</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100"><input type="radio" name="clarity_e2" value="2" required class="block mx-auto mb-1"><span class="text-xs font-semibold">2</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100"><input type="radio" name="clarity_e2" value="3" required class="block mx-auto mb-1"><span class="text-xs font-semibold">3</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-slate-100"><input type="radio" name="clarity_e2" value="4" required class="block mx-auto mb-1"><span class="text-xs font-semibold">4</span></label>
+                            </div>
+                        </div>
+                        <div class="md:pl-6">
+                            <p class="text-sm font-bold text-slate-700 mb-3 text-center">Skor Kerelevanan <span class="text-red-500">*</span></p>
+                            <div class="grid grid-cols-4 gap-2">
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50"><input type="radio" name="relev_e2" value="1" required class="block mx-auto mb-1"><span class="text-xs font-semibold">1</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50"><input type="radio" name="relev_e2" value="2" required class="block mx-auto mb-1"><span class="text-xs font-semibold">2</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50"><input type="radio" name="relev_e2" value="3" required class="block mx-auto mb-1"><span class="text-xs font-semibold">3</span></label>
+                                <label class="border rounded p-2 text-center cursor-pointer hover:bg-blue-50"><input type="radio" name="relev_e2" value="4" required class="block mx-auto mb-1"><span class="text-xs font-semibold">4</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- BAHAGIAN F: Komen Keseluruhan -->
+            <div class="mb-10">
+                <h3 class="text-lg font-bold bg-slate-800 text-white px-5 py-3 rounded-t-lg">BAHAGIAN F: KOMEN DAN CADANGAN KESELURUHAN</h3>
+                <div class="border border-slate-200 border-t-0 rounded-b-lg p-6 bg-slate-50 space-y-6">
+                    <div>
+                        <label class="block font-semibold text-slate-800 mb-1">1. Adakah terdapat mana-mana soalan yang MENGELIRUKAN?</label>
+                        <p class="text-sm text-slate-500 mb-2">Jika Ya, sila nyatakan item yang mana dan cadangan ayat baru.</p>
+                        <textarea name="komen_mengelirukan" class="w-full border border-slate-300 p-3 rounded-md focus:ring-2 focus:ring-blue-500 outline-none" rows="3" placeholder="Contoh: Item D4 ayatnya terlalu panjang..."></textarea>
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-800 mb-1">2. Adakah aspek PENTING yang TERTINGGAL dalam instrumen ini?</label>
+                        <p class="text-sm text-slate-500 mb-2">Jika Ya, sila nyatakan apakah elemen yang perlu kami tambah.</p>
+                        <textarea name="komen_tertinggal" class="w-full border border-slate-300 p-3 rounded-md focus:ring-2 focus:ring-blue-500 outline-none" rows="3" placeholder="Sila taip jawapan anda di sini..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status Message Area -->
+            <div id="statusMessage" class="hidden rounded-md p-4 mb-6 text-center font-semibold"></div>
+
+            <!-- Submit & Print Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 border-t border-slate-200 pt-8 mt-4 no-print">
+                <button type="submit" id="submitBtn" class="w-full sm:w-auto bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition flex items-center justify-center">
+                    <span id="submitText">Hantar Penilaian</span>
+                    <span id="loadingSpinner" class="loader ml-3 hidden"></span>
+                </button>
+                <button type="button" onclick="window.print()" class="w-full sm:w-auto bg-slate-200 hover:bg-slate-300 text-slate-800 font-semibold py-3 px-8 rounded-lg shadow transition">
+                    🖨️ Cetak Borang (PDF)
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+    <!-- PENTING: Gantikan URL ini dengan URL Web App dari Google Apps Script -->
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzEwks3kPqh4LPoevdWEkXb8l54iWbRPKBRwruqpzEjf94BLWanQKEjUzKgHmbgJ25pZg/exec'; 
+        const form = document.getElementById('bcpForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const submitText = document.getElementById('submitText');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const statusMessage = document.getElementById('statusMessage');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            
+            submitBtn.disabled = true;
+            submitBtn.classList.replace('bg-blue-700', 'bg-blue-400');
+            submitText.innerText = "Sedang Dihantar...";
+            loadingSpinner.classList.remove('hidden');
+            statusMessage.classList.add('hidden');
+
+            const formData = new FormData(form);
+
+            // Mock submission behavior for preview environment if URL is unchanged
+            if(scriptURL === 'MASUKKAN_URL_GOOGLE_APPS_SCRIPT_ANDA_DI_SINI') {
+                setTimeout(() => {
+                    showStatus('Sila masukkan URL Google Apps Script yang sah ke dalam fail HTML ini (Simulasi Pratahan Berjaya).', 'error');
+                }, 1000);
+                return;
+            }
+
+            // Gunakan fetch standard tanpa 'no-cors'
+            fetch(scriptURL, { method: 'POST', body: formData })
+                .then(response => {
+                    // Berjaya dihantar
+                    showStatus('Maklum balas anda berjaya direkodkan. Terima kasih!', 'success');
+                    form.reset(); 
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    showStatus('Ralat berlaku. Sila cuba sebentar lagi.', 'error');
+                });
+        });
+
+        function showStatus(message, type) {
+            submitBtn.disabled = false;
+            submitBtn.classList.replace('bg-blue-400', 'bg-blue-700');
+            submitText.innerText = "Hantar Penilaian";
+            loadingSpinner.classList.add('hidden');
+
+            statusMessage.innerText = message;
+            statusMessage.classList.remove('hidden', 'bg-red-100', 'text-red-700', 'bg-green-100', 'text-green-700');
+            
+            if(type === 'success') {
+                statusMessage.classList.add('bg-green-100', 'text-green-800', 'border', 'border-green-300');
+            } else {
+                statusMessage.classList.add('bg-red-100', 'text-red-800', 'border', 'border-red-300');
+            }
+        }
+    </script>
+</body>
+</html>
